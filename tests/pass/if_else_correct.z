@@ -1,0 +1,16 @@
+    var = 3123;
+    _imap = 25;
+
+    if (_imap--)
+        if (++_imap)
+            print(var);
+        else
+        {
+            print(_imap);
+        }
+        
+
+    if (var *= ((_imap)) - (-_imap)) 00;
+    else
+        1111;
+        

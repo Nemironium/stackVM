@@ -1,0 +1,17 @@
+    var = 3123;
+    _imap = 25;
+    if (_imap--)
+        if (-++_imap)
+            print(var);
+        if (0) _imap -= 54; 
+        if else (0) {printf("%d", var);}
+        if else else (var != 0)
+        {
+            print(_imap);
+        }
+        
+
+    if (var *= ((_imap)) - (-_imap)) 00;
+    if else (--111) {
+        1111;
+    }

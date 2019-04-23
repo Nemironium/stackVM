@@ -1,0 +1,8 @@
+b = 3;
+__c = 999;
+__c += -b++ + 2;
+print(__c += 1));
+print(__c --;
+print((__c += 286));
+print(A)
+print(--b);
