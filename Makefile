@@ -18,10 +18,13 @@ $(TARGET):
 	$(LEX) -o $(DIR)/lex.yy.c $(SRCDIR)/lexer.l
 	$(CC) $(DIR)/y.tab.c $(DIR)/lex.yy.c $(CFLAGS) -o $(TARGET)
 	$(CXX) $(SRCDIR)/preprocessor.cpp -o preprocessor $(CXXFLAGS)
+	$(CXX) $(SRCDIR)/interpretator.cpp -o interpretator $(CXXFLAGS)
 
 clean:
 	rm -rf $(DIR)
 	rm -f $(TARGET)
 	rm -f preprocessor
+	rm -f interpretator
+
 
 rebuild: clean all
