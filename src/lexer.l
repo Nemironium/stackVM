@@ -80,6 +80,6 @@ int yywrap() {
         fprintf(stderr, "Logical Error: number of 'else' is more than 'if'\n");
         exit(1);
     }
-    fprintf(stderr, "Everything is correct\n");
+    fprintf(stderr, "Analyzer: Everything is correct\n");
     exit(1);
 }
