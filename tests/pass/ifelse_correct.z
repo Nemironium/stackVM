@@ -1,16 +1,16 @@
     var = 3123;
     _imap = 25;
 
-    if (_imap--)
-        if (++_imap) 
+    if (_imap-- != 0)
+        if (_imap++ > _imap) 
             print(var);
         else if (-var-- != 0)
         {
-            print(_imap);
+            print(var);
         }
         
 
-    if (var *= ((_imap)) - (-_imap)) 00;
+    if (((_imap)) - (-_imap) == _imap*2) return(00);
     else if (111)
-        1111;
+        return (-1111);
         

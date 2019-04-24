@@ -1,6 +1,7 @@
 _var = 100500;
 b_3 = -333;
+return ((++b_3)*((((_var)))));
 return;
 return b_3;
 return (b_3);
-return ((++b_3)*((((_var)))));
+

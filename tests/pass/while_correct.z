@@ -1,14 +1,18 @@
-var = 3123;
-_imap = 25;
-while(_imap--) 
-    while(++_imap)
-        print(var);
-
-while(var *= ((_imap)) - (-_imap))
-    _imap %= 5;
-
-while   (-var++ >= ++_imap ) {
-    print(var);
-      000000;  
+var = 1337;
+    _imap = 1488;
+    ctr = 228;
+    res = 0;
+    while (ctr-- != 0)
+        while (++var <= _imap++) {
+            var += 3;
+            ++_imap;
+            ++_imap;
+            res++;
         }
-               
+    print( res);
+
+    ibks_izi = -1337;
+    while (res++ <= (-2)*(ibks_izi)) {
+        res = res +  1;    
+    }
+    print( res);         
