@@ -191,6 +191,7 @@ void push(string arg)
     //cout << "push==" << arg << endl;
     if (arg[0] != '[') {
         stack.emplace_back(std::stoi(arg));
+
         /*cout << "stack values:" << endl;
         for (auto const &_ : stack)
             cout << _ << ' ';
@@ -202,6 +203,7 @@ void push(string arg)
             ctr++;
             if (arg == _.first) {
                 stack.emplace_back(_.second);
+
                 /*cout << "stack values:" << endl;
                 for (auto const &_ : stack)
                     cout << _ << ' ';
@@ -217,7 +219,8 @@ void push(string arg)
 void str(string arg)
 {
     //cout << "str==" << arg << endl;
-    heap.emplace(arg, stack[stack.size() - 1]);
+    heap[arg] = stack[stack.size() - 1];
+    //heap.insert(heap.begin(), std::pair<string,int>(arg, stack[stack.size() - 1]));
     /*cout << "heap values:" << endl;
     for(auto const & _ : heap)
         cout << _.first << ':' << _.second << ' ';
@@ -227,7 +230,10 @@ void str(string arg)
 void pop(void)
 {
     stack.pop_back();
-    //stack.clear();
+    /*cout << "stack values:" << endl;
+    for (auto const &_ : stack)
+        cout << _ << ' ';
+    cout << endl;*/
 }
 
 void add(void)
@@ -236,6 +242,11 @@ void add(void)
     stack.pop_back();
     stack.pop_back();
     stack.push_back(temp);
+
+    /*cout << "stack values:" << endl;
+    for (auto const &_ : stack)
+        cout << _ << ' ';
+    cout << endl;*/
 }
 
 void sub(void)
@@ -244,6 +255,11 @@ void sub(void)
     stack.pop_back();
     stack.pop_back();
     stack.push_back(temp);
+
+    /*cout << "stack values:" << endl;
+    for (auto const &_ : stack)
+        cout << _ << ' ';
+    cout << endl;*/
 }
 
 void mul(void)
@@ -252,6 +268,11 @@ void mul(void)
     stack.pop_back();
     stack.pop_back();
     stack.push_back(temp);
+
+    /*cout << "stack values:" << endl;
+    for (auto const &_ : stack)
+        cout << _ << ' ';
+    cout << endl;*/
 }
 
 void div(void)
@@ -260,6 +281,11 @@ void div(void)
     stack.pop_back();
     stack.pop_back();
     stack.push_back(temp);
+
+    /*cout << "stack values:" << endl;
+    for (auto const &_ : stack)
+        cout << _ << ' ';
+    cout << endl;*/
 }
 
 void mod(void)
@@ -268,6 +294,11 @@ void mod(void)
     stack.pop_back();
     stack.pop_back();
     stack.push_back(temp);
+
+    /*cout << "stack values:" << endl;
+    for (auto const &_ : stack)
+        cout << _ << ' ';
+    cout << endl;*/
 }
 
 void neg(void)
@@ -275,19 +306,24 @@ void neg(void)
     int temp = -stack[stack.size() - 1];
     stack.pop_back();
     stack.push_back(temp);
+
+    /*cout << "stack values:" << endl;
+    for (auto const &_ : stack)
+        cout << _ << ' ';
+    cout << endl;*/
 }
 
 void cmp()
 {
-    if (stack[stack.size() - 2] > stack[stack.size() - 1]) {
+    if (stack[stack.size() - 1] > stack[stack.size() - 2]) {
         SREG = MORE;
         //cout << "cmp:SREG=MORE" << endl;
     }
-    else if (stack[stack.size() - 2] < stack[stack.size() - 1]) {
+    else if (stack[stack.size() - 1] < stack[stack.size() - 2]) {
         SREG = LESS;
         //cout << "cmp:SREG=LESS" << endl;
     }
-    else if (stack[stack.size() - 2] == stack[stack.size() - 1]) {
+    else if (stack[stack.size() - 1] == stack[stack.size() - 2]) {
         SREG = EQ;
         //cout << "cmp:SREG=EQ" << endl;
     }
@@ -295,8 +331,8 @@ void cmp()
 
 void goTo(string arg)
 {
-    /*cout << "goto==" << arg << endl;
-    cout << "available labels::: ";
+    //cout << "goto==" << arg << endl;
+    /*cout << "available labels::: ";
     for (auto const &_ : labels) 
         cout << _.first << ':' << _.second << ' ';
     cout << endl;*/
