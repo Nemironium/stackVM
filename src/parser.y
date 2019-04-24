@@ -80,7 +80,7 @@ assign:
     | VAR ASSIGN expr { printf("\tstr [%s]\n", $1); free($1); } 
 
 while:
-    WHILE '(' while_condition ')' stat { printf("\t\tjmp cycle_%d\n", label.mark[label.number] + 1); printf("label%d:\n", label.mark[label.number]);  pop(); }
+    WHILE '(' while_condition ')' stat { printf("\t\tjmp cycle%d\n", label.mark[label.number] + 1); printf("label%d:\n", label.mark[label.number]);  pop(); }
 
 if_else_elif:
     if_expr elif_expr else_expr {  printf("label%d:\n", label.mark[label.number] + 1);  pop(); }
@@ -107,22 +107,22 @@ while_condition:
 	| condition_assign { printf("\tpush 0\n"); printf("\tcmp\n"); printf("\tpop\n"); printf("\tjz label%d\n", label.mark[label.number]);}
 
 condition_expr:
-    '(' condition_expr ')' { push(); printf("cycle_%d:\n", label.mark[label.number]+1); }
-	| condition_expr MINUS condition_expr { push(); printf("cycle_%d:\n", label.mark[label.number]+1);  printf("\tsub\n"); }
-	| condition_expr PLUS condition_expr { push(); printf("cycle_%d:\n", label.mark[label.number]+1); printf("\tadd\n"); }
-	| condition_expr MUL condition_expr { push(); printf("cycle_%d:\n", label.mark[label.number]+1); printf("\tmul\n"); }
-	| condition_expr DIV condition_expr { push(); printf("cycle_%d:\n", label.mark[label.number]+1); printf("\tdiv\n"); }
-	| condition_expr MOD condition_expr { push(); printf("cycle_%d:\n", label.mark[label.number]+1); printf("\tmod\n"); }
-	| NUM { push(); printf("cycle_%d:\n", label.mark[label.number]+1);  printf("\tpush %d\n", $1); }
-	| MINUS NUM { push(); printf("cycle_%d:\n", label.mark[label.number]+1); printf("\tpush %d\n", $2); printf("\tneg\n"); }
-	| VAR  { push(); printf("cycle_%d:\n", label.mark[label.number]+1); printf("\tpush [%s]\n", $1); free($1); }
-	| MINUS VAR { push(); printf("cycle_%d:\n", label.mark[label.number]+1);  printf("\tpush [%s]\n", $2); printf("neg\n"); free($2); }
-	| VAR INC { push(); printf("cycle_%d:\n", label.mark[label.number]+1); printf("\tpush [%s]\n", $1); printf("\tpush [%s]\n", $1); printf("\tpush 1\n"); printf("add\n"); printf("\tpop [%s]\n", $1); free($1); }
-	| INC VAR { push(); printf("cycle_%d:\n", label.mark[label.number]+1);  printf("\tpush [%s]\n", $2); printf("\tpush 1\n"); printf("\tadd\n"); printf("\tstr [%s]\n", $2); free($2); }
-	| VAR DEC { push(); printf("cycle_%d:\n", label.mark[label.number]+1);  printf("\tpush [%s]\n", $1); printf("\tpush [%s]\n", $1); printf("\tpush 1\n"); printf("\tsub\n"); printf("\tpop [%s]\n", $1); free($1); }
-	| DEC VAR { push(); printf("cycle_%d:\n", label.mark[label.number]+1);  printf("\tpush [%s]\n", $2); printf("\tpush 1\n"); printf("\tsub\n"); printf("\tstr [%s]\n", $2); free($2); }
-	| MINUS VAR INC { push(); printf("cycle_%d:\n", label.mark[label.number]+1); printf("\tneg \n"); printf("\tpush [%s]\n", $2); printf("\tpush [%s]\n", $2); printf("\tpush 1\n"); printf("\tadd\n"); printf("\tpop [%s]\n", $2); free($2); }
-    | MINUS VAR DEC { push(); printf("cycle_%d:\n", label.mark[label.number]+1); printf("\tneg \n"); printf("\tpush [%s]\n", $2); printf("\tpush [%s]\n", $2); printf("\tpush 1\n"); printf("\tsub\n"); printf("\tpop [%s]\n", $2); free($2); };
+    '(' condition_expr ')' { push(); printf("cycle%d:\n", label.mark[label.number]+1); }
+	| condition_expr MINUS condition_expr { push(); printf("cycle%d:\n", label.mark[label.number]+1);  printf("\tsub\n"); }
+	| condition_expr PLUS condition_expr { push(); printf("cycle%d:\n", label.mark[label.number]+1); printf("\tadd\n"); }
+	| condition_expr MUL condition_expr { push(); printf("cycle%d:\n", label.mark[label.number]+1); printf("\tmul\n"); }
+	| condition_expr DIV condition_expr { push(); printf("cycle%d:\n", label.mark[label.number]+1); printf("\tdiv\n"); }
+	| condition_expr MOD condition_expr { push(); printf("cycle%d:\n", label.mark[label.number]+1); printf("\tmod\n"); }
+	| NUM { push(); printf("cycle%d:\n", label.mark[label.number]+1);  printf("\tpush %d\n", $1); }
+	| MINUS NUM { push(); printf("cycle%d:\n", label.mark[label.number]+1); printf("\tpush %d\n", $2); printf("\tneg\n"); }
+	| VAR  { push(); printf("cycle%d:\n", label.mark[label.number]+1); printf("\tpush [%s]\n", $1); free($1); }
+	| MINUS VAR { push(); printf("cycle%d:\n", label.mark[label.number]+1);  printf("\tpush [%s]\n", $2); printf("neg\n"); free($2); }
+	| VAR INC { push(); printf("cycle%d:\n", label.mark[label.number]+1); printf("\tpush [%s]\n", $1); printf("\tpush [%s]\n", $1); printf("\tpush 1\n"); printf("add\n"); printf("\tpop [%s]\n", $1); free($1); }
+	| INC VAR { push(); printf("cycle%d:\n", label.mark[label.number]+1);  printf("\tpush [%s]\n", $2); printf("\tpush 1\n"); printf("\tadd\n"); printf("\tstr [%s]\n", $2); free($2); }
+	| VAR DEC { push(); printf("cycle%d:\n", label.mark[label.number]+1);  printf("\tpush [%s]\n", $1); printf("\tpush [%s]\n", $1); printf("\tpush 1\n"); printf("\tsub\n"); printf("\tpop [%s]\n", $1); free($1); }
+	| DEC VAR { push(); printf("cycle%d:\n", label.mark[label.number]+1);  printf("\tpush [%s]\n", $2); printf("\tpush 1\n"); printf("\tsub\n"); printf("\tstr [%s]\n", $2); free($2); }
+	| MINUS VAR INC { push(); printf("cycle%d:\n", label.mark[label.number]+1); printf("\tneg \n"); printf("\tpush [%s]\n", $2); printf("\tpush [%s]\n", $2); printf("\tpush 1\n"); printf("\tadd\n"); printf("\tpop [%s]\n", $2); free($2); }
+    | MINUS VAR DEC { push(); printf("cycle%d:\n", label.mark[label.number]+1); printf("\tneg \n"); printf("\tpush [%s]\n", $2); printf("\tpush [%s]\n", $2); printf("\tpush 1\n"); printf("\tsub\n"); printf("\tpop [%s]\n", $2); free($2); };
 
 condition_assign:
     VAR ASSIGN condition_expr { printf("\tstr [%s]\n", $1); free($1); }
