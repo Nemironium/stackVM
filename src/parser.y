@@ -101,8 +101,8 @@ while_condition:
 	| condition_expr NOTEQ expr { printf("\tcmp\n"); printf("\tpop\n"); printf("\tje label%d\n", label.mark[label.number]);}
 	| condition_expr LESS_EQ expr { printf("\tcmp\n"); printf("\tpop\n"); printf("\tja label%d\n", label.mark[label.number]);}
 	| condition_expr MORE_EQ expr {  printf("\tcmp\n"); printf("\tpop\n"); printf("\tjb label%d\n", label.mark[label.number]);}
-	| condition_expr MORE expr { printf("\tcmp\n"); printf("\tpop\n");  printf("\tjbe label%d\n", label.mark[label.number]);}
-	| condition_expr LESS expr { printf("\tcmp\n"); printf("\tpop\n");  printf("\tjae label%d\n", label.mark[label.number]);}	
+	| condition_expr LESS expr { printf("\tcmp\n"); printf("\tpop\n");  printf("\tjbe label%d\n", label.mark[label.number]);}
+	| condition_expr MORE expr { printf("\tcmp\n"); printf("\tpop\n");  printf("\tjae label%d\n", label.mark[label.number]);}	
 	| condition_expr condition_assign condition_expr  { printf("\tpush 0\n"); printf("\tcmp\n"); printf("\tpop\n"); printf("\tjz label%d\n", label.mark[label.number]);}
 	| condition_assign { printf("\tpush 0\n"); printf("\tcmp\n"); printf("\tpop\n"); printf("\tjz label%d\n", label.mark[label.number]);}
 
@@ -145,8 +145,8 @@ if_condition:
 	| expr NOTEQ expr { push();  printf("\tcmp\n"); printf("\tpop\n"); printf("\tje label%d\n", label.mark[label.number]);}
 	| expr LESS_EQ expr { push();  printf("\tcmp\n"); printf("\tpop\n"); printf("\tja label%d\n", label.mark[label.number]);}
 	| expr MORE_EQ expr { push();  printf("\tcmp\n"); printf("\tpop\n"); printf("\tjb label%d\n", label.mark[label.number]);}
-	| expr MORE expr { push(); printf("\tcmp\n"); printf("\tpop\n");  printf("\tjbe label%d\n", label.mark[label.number]);}
-	| expr LESS expr { push();  printf("\tcmp\n"); printf("\tpop\n");  printf("\tjae label%d\n", label.mark[label.number]);}	
+	| expr LESS expr { push(); printf("\tcmp\n"); printf("\tpop\n");  printf("\tjbe label%d\n", label.mark[label.number]);}
+	| expr MORE expr { push();  printf("\tcmp\n"); printf("\tpop\n");  printf("\tjae label%d\n", label.mark[label.number]);}	
 	| expr assign expr  {push(); printf("\tpush 0\n"); printf("\tcmp\n"); printf("\tpop\n"); printf("\tjz label%d\n", label.mark[label.number]);}
 	| assign { push();  printf("\tpush 0\n"); printf("\tcmp\n"); printf("\tpop\n"); printf("\tjz label%d\n", label.mark[label.number]);}
 %%
