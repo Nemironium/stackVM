@@ -68,12 +68,12 @@ expr:
     | MINUS NUM { printf("\tpush %d\n", $2); printf("\tneg \n"); }
 	| VAR  { printf("\tpush [%s]\n", $1); free($1); }
 	| MINUS VAR { printf("\tpush [%s]\n", $2); printf("\tneg \n"); free($2); }
-    | VAR INC { printf("\tpush [%s]\n", $1); printf("\tpush [%s]\n", $1); printf("\tpush 1\n"); printf("\tadd\n"); printf("\tpop [%s]\n", $1);  free($1);} 
+    | VAR INC { printf("\tpush [%s]\n", $1); printf("\tpush [%s]\n", $1); printf("\tpush 1\n"); printf("\tadd\n"); printf("\tstr [%s]\n", $1);  free($1);} 
 	| INC VAR { printf("\tpush [%s]\n", $2); printf("\tpush 1\n"); printf("\tadd\n"); printf("\tstr [%s]\n", $2); free($2); }
-	| VAR DEC { printf("\tpush [%s]\n", $1); printf("\tpush [%s]\n", $1); printf("\tpush 1\n"); printf("\tsub\n"); printf("\tpop [%s]\n", $1); free($1); }
+	| VAR DEC { printf("\tpush [%s]\n", $1); printf("\tpush [%s]\n", $1); printf("\tpush 1\n"); printf("\tsub\n"); printf("\tstr [%s]\n", $1); free($1); }
 	| DEC VAR { printf("\tpush [%s]\n", $2); printf("\tpush 1\n"); printf("\tsub\n"); printf("\tstr [%s]\n", $2); free($2); }
-    | MINUS VAR DEC { printf("\tpush [%s]\n", $2); printf("\tneg \n"); printf("\tpush [%s]\n", $2); printf("\tpush 1\n"); printf("\tsub\n"); printf("\tpop [%s]\n", $2); free($2); }
-    | MINUS VAR INC { printf("\tpush [%s]\n", $2); printf("\tneg \n"); printf("\tpush [%s]\n", $2); printf("\tpush 1\n"); printf("\tadd\n"); printf("\tpop [%s]\n", $2); free($2); };
+    | MINUS VAR DEC { printf("\tpush [%s]\n", $2); printf("\tneg \n"); printf("\tpush [%s]\n", $2); printf("\tpush 1\n"); printf("\tsub\n"); printf("\tstr [%s]\n", $2); free($2); }
+    | MINUS VAR INC { printf("\tpush [%s]\n", $2); printf("\tneg \n"); printf("\tpush [%s]\n", $2); printf("\tpush 1\n"); printf("\tadd\n"); printf("\tstr [%s]\n", $2); free($2); };
 
 assign: 
     VAR ASSIGN assign { printf("\tstr [%s]\n", $1); free($1); }
@@ -117,12 +117,12 @@ condition_expr:
 	| MINUS NUM { push(); printf("cycle%d:\n", label.mark[label.number]+1); printf("\tpush %d\n", $2); printf("\tneg\n"); }
 	| VAR  { push(); printf("cycle%d:\n", label.mark[label.number]+1); printf("\tpush [%s]\n", $1); free($1); }
 	| MINUS VAR { push(); printf("cycle%d:\n", label.mark[label.number]+1);  printf("\tpush [%s]\n", $2); printf("neg\n"); free($2); }
-	| VAR INC { push(); printf("cycle%d:\n", label.mark[label.number]+1); printf("\tpush [%s]\n", $1); printf("\tpush [%s]\n", $1); printf("\tpush 1\n"); printf("add\n"); printf("\tpop [%s]\n", $1); free($1); }
+	| VAR INC { push(); printf("cycle%d:\n", label.mark[label.number]+1); printf("\tpush [%s]\n", $1); printf("\tpush [%s]\n", $1); printf("\tpush 1\n"); printf("add\n"); printf("\tstr [%s]\n", $1); free($1); }
 	| INC VAR { push(); printf("cycle%d:\n", label.mark[label.number]+1);  printf("\tpush [%s]\n", $2); printf("\tpush 1\n"); printf("\tadd\n"); printf("\tstr [%s]\n", $2); free($2); }
-	| VAR DEC { push(); printf("cycle%d:\n", label.mark[label.number]+1);  printf("\tpush [%s]\n", $1); printf("\tpush [%s]\n", $1); printf("\tpush 1\n"); printf("\tsub\n"); printf("\tpop [%s]\n", $1); free($1); }
+	| VAR DEC { push(); printf("cycle%d:\n", label.mark[label.number]+1);  printf("\tpush [%s]\n", $1); printf("\tpush [%s]\n", $1); printf("\tpush 1\n"); printf("\tsub\n"); printf("\tstr [%s]\n", $1); free($1); }
 	| DEC VAR { push(); printf("cycle%d:\n", label.mark[label.number]+1);  printf("\tpush [%s]\n", $2); printf("\tpush 1\n"); printf("\tsub\n"); printf("\tstr [%s]\n", $2); free($2); }
-	| MINUS VAR INC { push(); printf("cycle%d:\n", label.mark[label.number]+1); printf("\tneg \n"); printf("\tpush [%s]\n", $2); printf("\tpush [%s]\n", $2); printf("\tpush 1\n"); printf("\tadd\n"); printf("\tpop [%s]\n", $2); free($2); }
-    | MINUS VAR DEC { push(); printf("cycle%d:\n", label.mark[label.number]+1); printf("\tneg \n"); printf("\tpush [%s]\n", $2); printf("\tpush [%s]\n", $2); printf("\tpush 1\n"); printf("\tsub\n"); printf("\tpop [%s]\n", $2); free($2); };
+	| MINUS VAR INC { push(); printf("cycle%d:\n", label.mark[label.number]+1); printf("\tneg \n"); printf("\tpush [%s]\n", $2); printf("\tpush [%s]\n", $2); printf("\tpush 1\n"); printf("\tadd\n"); printf("\tstr [%s]\n", $2); free($2); }
+    | MINUS VAR DEC { push(); printf("cycle%d:\n", label.mark[label.number]+1); printf("\tneg \n"); printf("\tpush [%s]\n", $2); printf("\tpush [%s]\n", $2); printf("\tpush 1\n"); printf("\tsub\n"); printf("\tstr [%s]\n", $2); free($2); };
 
 condition_assign:
     VAR ASSIGN condition_expr { printf("\tstr [%s]\n", $1); free($1); }
