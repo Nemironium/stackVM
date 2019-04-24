@@ -10,3 +10,9 @@ analyzer
 preprocessor
 interpretator
 
+#test .c file
+cfile.c
+cfile
+
+
+
